@@ -1,0 +1,49 @@
+前期准备：
+
+1. 本项目为语音识别，基于Atlas 200 DK和Mind Studio开发并运行。本项目的输入音频分为两种方式：（1）利用Mind Studio平台运行保存音频程序，录制的音频作为输入；（2）利用其他wav格式的音频作为输入
+
+
+1. 在开发板上安装好numpy，scipy，tensorflow，wave，python_speech_features等依赖库后，即可正常运行本项目代码。依赖库安装过程，较为耗时麻烦，请耐心安装。详细安装过程请见书稿内容。
+
+
+2. 安装好所有依赖库后，将本文件上传至开发板。
+
+
+
+
+
+代码文件说明：
+
+1. main.py 在开发板直接运行该程序即可实现语音识别，并在终端输出识别结果：语音序列和文本序列
+
+
+2. pcm2wav.py 将pcm格式的音频转为wav格式音频
+
+
+3. get_features.py 提取wav格式音频的声学特征，并返回(1,1600,200,1)尺寸的特征向量，作为输入张量
+
+
+4. make_input_tensorflow.py 用与将输入张量转换为华为模型推理所需要的张量要求
+
+
+5. speech_recog_model文件夹 语言识别所用的语言模型
+
+
+6. ctc_function.py 将模型推理后的结果进行ctc解码，生成拼音序列结果。（该代码为调用tensorflow内置函数所构建的）
+
+
+7. language_model文件夹 语言模型，即词频信息，用于将拼音序列转为文本序列。
+
+
+8. language_model_func.py 语言模型实现函数
+
+
+9. speech_voice文件夹 为测试的音频文件，jlu.wav，nihao.wav为手机录制的音频，Atlas_voice/01.wav, 02.wav为开发板录制音频（为避免风扇的噪声，录制时将风扇断电了）
+
+
+10. train_mspeech.py 为声学模型训练程序
+
+
+11. 声学模型训练数据集需要两个：（1）清华大学THCHS30中文语音数据集 （2）ST-CMDS数据集。数据集下载完成后，放到指定文件夹中，修改train_mspeech.py中训练集路径，即可直接运行进行训练。
+
+
